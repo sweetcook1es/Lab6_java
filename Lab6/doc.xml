@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<documentation>
+    <project>
+        <name>Лабораторная работа 6</name>
+        <package>Lab6</package>
+    </project>
+
+    <annotations>
+        <annotation>
+            <name>Invoke</name>
+            <target>METHOD</target>
+            <retention>RUNTIME</retention>
+        </annotation>
+
+        <annotation>
+            <name>Default</name>
+            <target>TYPE, FIELD</target>
+            <retention>RUNTIME</retention>
+            <parameters>
+                <parameter>
+                    <name>value</name>
+                    <type>Class&lt;?&gt;</type>
+                </parameter>
+            </parameters>
+        </annotation>
+
+        <annotation>
+            <name>ToString</name>
+            <target>TYPE, FIELD</target>
+            <retention>RUNTIME</retention>
+            <parameters>
+                <parameter>
+                    <name>value</name>
+                    <type>ToString.Mode</type>
+                    <default>YES</default>
+                </parameter>
+            </parameters>
+            <enum>
+                <name>Mode</name>
+                <values>
+                    <value>YES - включить поле в строковое представление</value>
+                    <value>NO - исключить поле из строкового представления</value>
+                </values>
+            </enum>
+        </annotation>
+
+        <annotation>
+            <name>Validate</name>
+            <target>TYPE, ANNOTATION_TYPE</target>
+            <retention>RUNTIME</retention>
+            <parameters>
+                <parameter>
+                    <name>value</name>
+                    <type>Class&lt;?&gt;[]</type>
+                </parameter>
+            </parameters>
+        </annotation>
+
+        <annotation>
+            <name>Two</name>
+            <target>TYPE</target>
+            <retention>RUNTIME</retention>
+            <parameters>
+                <parameter>
+                    <name>first</name>
+                    <type>String</type>
+                </parameter>
+                <parameter>
+                    <name>second</name>
+                    <type>int</type>
+                </parameter>
+            </parameters>
+        </annotation>
+
+        <annotation>
+            <name>Cache</name>
+            <target>TYPE</target>
+            <retention>RUNTIME</retention>
+            <parameters>
+                <parameter>
+                    <name>value</name>
+                    <type>String[]</type>
+                    <default>пустой массив</default>
+                </parameter>
+            </parameters>
+        </annotation>
+    </annotations>
+
+    <handlers>
+        <handler>
+            <name>InvokeHandler</name>
+            <class>Lab6.InvokeHandler</class>
+            <description>
+                Обработчик аннотации @Invoke
+            </description>
+            <methods>
+                <method>
+                    <name>invokeAnnotatedMethods</name>
+                    <signature>public static void invokeAnnotatedMethods(Object obj) throws Exception</signature>
+                    <parameters>
+                        <parameter>
+                            <name>obj</name>
+                            <type>Object</type>
+                        </parameter>
+                    </parameters>
+                    <returns>void</returns>
+                    <throws>
+                        <exception>Exception - если возникает ошибка при вызове метода</exception>
+                        <exception>IllegalArgumentException - если obj == null</exception>
+                    </throws>
+                </method>
+            </methods>
+        </handler>
+
+        <handler>
+            <name>DefaultHandler</name>
+            <class>Lab6.DefaultHandler</class>
+            <description>
+                Обработчик аннотации @Default
+            </description>
+            <methods>
+                <method>
+                    <name>printDefaultClass</name>
+                    <signature>public static void printDefaultClass(Object obj)</signature>
+                    <parameters>
+                        <parameter>
+                            <name>obj</name>
+                            <type>Object</type>
+                        </parameter>
+                    </parameters>
+                    <returns>void</returns>
+                    <throws>
+                        <exception>IllegalArgumentException - если obj == null</exception>
+                    </throws>
+                </method>
+            </methods>
+        </handler>
+
+        <handler>
+            <name>ToStringHandler</name>
+            <class>Lab6.ToStringHandler</class>
+            <description>
+                Обработчик аннотации @ToString
+            </description>
+            <methods>
+                <method>
+                    <name>generateToString</name>
+                    <signature>public static String generateToString(Object obj)</signature>
+                    <parameters>
+                        <parameter>
+                            <name>obj</name>
+                            <type>Object</type>
+                        </parameter>
+                    </parameters>
+                    <returns>String - строковое представление объекта</returns>
+                </method>
+            </methods>
+        </handler>
+
+        <handler>
+            <name>ValidateHandler</name>
+            <class>Lab6.ValidateHandler</class>
+            <description>
+                Обработчик аннотации @Validate
+            </description>
+            <methods>
+                <method>
+                    <name>printValidationClasses</name>
+                    <signature>public static void printValidationClasses(Object obj)</signature>
+                    <parameters>
+                        <parameter>
+                            <name>obj</name>
+                            <type>Object</type>
+                        </parameter>
+                    </parameters>
+                    <returns>void</returns>
+                    <throws>
+                        <exception>IllegalArgumentException - если obj == null или список классов пуст</exception>
+                    </throws>
+                </method>
+            </methods>
+        </handler>
+
+        <handler>
+            <name>TwoHandler</name>
+            <class>Lab6.TwoHandler</class>
+            <description>
+                Обработчик аннотации @Two
+            </description>
+            <methods>
+                <method>
+                    <name>printTwoValues</name>
+                    <signature>public static void printTwoValues(Object obj)</signature>
+                    <parameters>
+                        <parameter>
+                            <name>obj</name>
+                            <type>Object</type>
+                        </parameter>
+                    </parameters>
+                    <returns>void</returns>
+                    <throws>
+                        <exception>IllegalArgumentException - если obj == null</exception>
+                    </throws>
+                </method>
+            </methods>
+        </handler>
+
+        <handler>
+            <name>CacheHandler</name>
+            <class>Lab6.CacheHandler</class>
+            <description>
+                Обработчик аннотации @Cache
+            </description>
+            <methods>
+                <method>
+                    <name>printCacheAreas</name>
+                    <signature>public static void printCacheAreas(Object obj)</signature>
+                    <parameters>
+                        <parameter>
+                            <name>obj</name>
+                            <type>Object</type>
+                        </parameter>
+                    </parameters>
+                    <returns>void</returns>
+                    <throws>
+                        <exception>IllegalArgumentException - если obj == null</exception>
+                    </throws>
+                </method>
+            </methods>
+        </handler>
+    </handlers>
+
+    <demo-classes>
+        <class>
+            <name>InvokeAnnotationDemoClass</name>
+            <description>
+                Демонстрационный класс для аннотации @Invoke
+            </description>
+            <methods>
+                <method>
+                    <name>method1</name>
+                    <annotations>@Invoke</annotations>
+                    <access>public</access>
+                </method>
+                <method>
+                    <name>method2</name>
+                    <access>public</access>
+                </method>
+                <method>
+                    <name>privateMethod</name>
+                    <annotations>@Invoke</annotations>
+                    <access>private</access>
+                </method>
+            </methods>
+        </class>
+
+        <class>
+            <name>DefaultAnnotationDemoClass</name>
+            <annotations>
+                <annotation>@Default(Integer.class)</annotation>
+            </annotations>
+            <description>
+                Демонстрационный класс для аннотации @Default
+            </description>
+            <fields>
+                <field>
+                    <name>field</name>
+                    <type>String</type>
+                    <annotations>@Default(String.class)</annotations>
+                </field>
+            </fields>
+            <methods>
+                <method>
+                    <name>DefaultAnnotationDemoClass</name>
+                    <access>public</access>
+                </method>
+                <method>
+                    <name>getField</name>
+                    <access>public</access>
+                    <return>String</return>
+                </method>
+                <method>
+                    <name>setField</name>
+                    <access>public</access>
+                    <param>String field</param>
+                </method>
+            </methods>
+        </class>
+
+        <class>
+            <name>ToStringAnnotationDemoClass</name>
+            <annotations>
+                <annotation>@ToString</annotation>
+            </annotations>
+            <description>
+                Демонстрационный класс для аннотации @ToString
+            </description>
+            <fields>
+                <field>
+                    <name>name</name>
+                    <type>String</type>
+                </field>
+                <field>
+                    <name>age</name>
+                    <type>int</type>
+                </field>
+                <field>
+                    <name>password</name>
+                    <type>String</type>
+                    <annotations>@ToString(ToString.Mode.NO)</annotations>
+                </field>
+                <field>
+                    <name>email</name>
+                    <type>String</type>
+                    <annotations>@ToString</annotations>
+                </field>
+            </fields>
+            <methods>
+                <method>
+                    <name>ToStringAnnotationDemoClass</name>
+                    <access>public</access>
+                    <param>String name</param>
+                    <param>int age</param>
+                    <param>String password</param>
+                    <param>String email</param>
+                </method>
+                <method>
+                    <name>getName</name>
+                    <access>public</access>
+                    <return>String</return>
+                </method>
+                <method>
+                    <name>setName</name>
+                    <access>public</access>
+                    <param>String name</param>
+                </method>
+                <method>
+                    <name>getAge</name>
+                    <access>public</access>
+                    <return>int</return>
+                </method>
+                <method>
+                    <name>setAge</name>
+                    <access>public</access>
+                    <param>int age</param>
+                </method>
+                <method>
+                    <name>getPassword</name>
+                    <access>public</access>
+                    <return>String</return>
+                </method>
+                <method>
+                    <name>setPassword</name>
+                    <access>public</access>
+                    <param>String password</param>
+                </method>
+                <method>
+                    <name>getEmail</name>
+                    <access>public</access>
+                    <return>String</return>
+                </method>
+                <method>
+                    <name>setEmail</name>
+                    <access>public</access>
+                    <param>String email</param>
+                </method>
+            </methods>
+        </class>
+
+        <class>
+            <name>ValidateAnnotationDemoClass</name>
+            <annotations>
+                <annotation>@Validate({String.class, Integer.class, Double.class})</annotation>
+            </annotations>
+            <description>
+                Демонстрационный класс для аннотации @Validate
+            </description>
+            <fields>
+                <field>
+                    <name>data</name>
+                    <type>String</type>
+                </field>
+            </fields>
+            <methods>
+                <method>
+                    <name>ValidateAnnotationDemoClass</name>
+                    <access>public</access>
+                    <param>String data</param>
+                </method>
+                <method>
+                    <name>getData</name>
+                    <access>public</access>
+                    <return>String</return>
+                </method>
+                <method>
+                    <name>setData</name>
+                    <access>public</access>
+                    <param>String data</param>
+                </method>
+            </methods>
+        </class>
+
+        <class>
+            <name>TwoAnnotationDemoClass</name>
+            <annotations>
+                <annotation>@Two(first = "Пример строки", second = 42)</annotation>
+            </annotations>
+            <description>
+                Демонстрационный класс для аннотации @Two
+            </description>
+            <fields>
+                <field>
+                    <name>info</name>
+                    <type>String</type>
+                </field>
+            </fields>
+            <methods>
+                <method>
+                    <name>TwoAnnotationDemoClass</name>
+                    <access>public</access>
+                    <param>String info</param>
+                </method>
+                <method>
+                    <name>getInfo</name>
+                    <access>public</access>
+                    <return>String</return>
+                </method>
+                <method>
+                    <name>setInfo</name>
+                    <access>public</access>
+                    <param>String info</param>
+                </method>
+            </methods>
+        </class>
+
+        <class>
+            <name>CacheAnnotationDemoClass</name>
+            <annotations>
+                <annotation>@Cache({"session", "database", "filesystem"})</annotation>
+            </annotations>
+            <description>
+                Демонстрационный класс для аннотации @Cache
+            </description>
+            <fields>
+                <field>
+                    <name>data</name>
+                    <type>String</type>
+                </field>
+            </fields>
+            <methods>
+                <method>
+                    <name>CacheAnnotationDemoClass</name>
+                    <access>public</access>
+                    <param>String data</param>
+                </method>
+                <method>
+                    <name>getData</name>
+                    <access>public</access>
+                    <return>String</return>
+                </method>
+                <method>
+                    <name>setData</name>
+                    <access>public</access>
+                    <param>String data</param>
+                </method>
+            </methods>
+        </class>
+    </demo-classes>
+
+    <main-class>
+        <name>Main</name>
+        <description>
+            Главный класс приложения с интерактивным меню
+        </description>
+        <methods>
+            <method>
+                <name>main</name>
+                <signature>public static void main(String[] args)</signature>
+            </method>
+            <method>
+                <name>demoInvoke</name>
+                <signature>private static void demoInvoke() throws Exception</signature>
+                <description>Демонстрация работы аннотации @Invoke</description>
+            </method>
+            <method>
+                <name>demoDefault</name>
+                <signature>private static void demoDefault()</signature>
+                <description>Демонстрация работы аннотации @Default</description>
+            </method>
+            <method>
+                <name>demoToString</name>
+                <signature>private static void demoToString()</signature>
+                <description>Демонстрация работы аннотации @ToString</description>
+            </method>
+            <method>
+                <name>demoValidate</name>
+                <signature>private static void demoValidate()</signature>
+                <description>Демонстрация работы аннотации @Validate</description>
+            </method>
+            <method>
+                <name>demoTwo</name>
+                <signature>private static void demoTwo()</signature>
+                <description>Демонстрация работы аннотации @Two</description>
+            </method>
+            <method>
+                <name>demoCache</name>
+                <signature>private static void demoCache()</signature>
+                <description>Демонстрация работы аннотации @Cache</description>
+            </method>
+            <method>
+                <name>runAllTests</name>
+                <signature>private static void runAllTests()</signature>
+                <description>Запуск всех JUnit</description>
+            </method>
+        </methods>
+    </main-class>
+
+    <test-classes>
+        <test>
+            <name>InvokeTest</name>
+            <description>
+                Тестовый класс для проверки корректности работы аннотации @Invoke
+                и её обработчика InvokeHandler.
+            </description>
+            <test-methods>
+                <method>
+                    <name>testInvokeAnnotatedMethods</name>
+                    <description>Проверяет корректный вызов всех методов, помеченных аннотацией @Invoke</description>
+                </method>
+                <method>
+                    <name>testInvokeMethodWithException</name>
+                    <description>Проверяет обработку исключений, выбрасываемых аннотированными методами</description>
+                </method>
+                <method>
+                    <name>testObjectStateAfterInvocation</name>
+                    <description>Проверяет сохранение состояния объекта после многократного вызова аннотированных методов</description>
+                </method>
+            </test-methods>
+        </test>
+
+        <test>
+            <name>ValidateTest</name>
+            <description>
+                Тестовый класс для проверки корректности работы аннотации @Validate
+                и её обработчика ValidateHandler.
+            </description>
+            <test-methods>
+                <method>
+                    <name>testValidateAnnotationExtraction</name>
+                    <description>Проверяет корректное извлечение классов из аннотации @Validate</description>
+                </method>
+                <method>
+                    <name>testEmptyValidateArray</name>
+                    <description>Проверяет обработку пустого массива классов в аннотации @Validate</description>
+                </method>
+                <method>
+                    <name>testNonEmptyValidateArray</name>
+                    <description>Проверяет обработку непустого массива классов в аннотации @Validate</description>
+                </method>
+                <method>
+                    <name>testClassOrderInOutput</name>
+                    <description>Проверяет порядок вывода классов в консоль</description>
+                </method>
+            </test-methods>
+        </test>
+    </test-classes>
+</documentation>
